@@ -11,8 +11,8 @@ namespace Chess
     {
         static void Main(string[] args)
         {
-            Piece p = new Pawn(Color.Black, 0, 0);
-            Console.WriteLine(p.Abb);
+            Game g = new Game();
+            g.play();
         }
     }
 }

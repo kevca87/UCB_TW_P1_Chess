@@ -7,6 +7,11 @@ namespace Chess
 {
     public class Pawn : Piece
     {
-        public Pawn(Color colorSide, int rowInit, int columnInit) : base(colorSide,rowInit,columnInit,"Pawn","p"){ }
+        public Pawn(Color colorSide, int columnInit) : base(colorSide,(int)RowEnum.r2,columnInit,"Pawn","p"){
+            if (colorSide == Color.Black)
+            {
+                RowInit = (int)RowEnum.r7;
+            }
+        }
     }
 }
