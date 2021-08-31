@@ -28,5 +28,30 @@ namespace Chess
     }
     class Board
     {
+        public Square[,] Matrix { get; set; } = new Square[8,8];
+        public Board()
+        {
+            for (int r= (int)RowEnum.r1; r<8;r++)
+            {
+                for (int c = (int)ColumnEnum.cA; c < 8; c++)
+                {
+                    Matrix[r,c] = new Square(r,c);
+                }
+            }
+        }
+        public Square getSquare(ColumnEnum col,RowEnum row)
+        {
+            return Matrix[(int)row,(int)col];
+        }
+        public Square getSquare(string squareName)
+        {
+            const int ascci_a_code = 97;
+            char columnChar = squareName[0];
+            char rowChar = squareName[1];
+            int col = columnChar - ascci_a_code;
+            int row = (int)Char.GetNumericValue(rowChar) - 1;
+            return Matrix[row,col];
+        }
+
     }
 }

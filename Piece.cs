@@ -8,8 +8,8 @@ namespace Chess
     {
 
         public Color ColorSide { get; set; }
-        public int RowInit { get; set; }
-        public int ColumnInit { get; set; }
+        public Square ActualPos { get; set; }
+        public Square InitPos { get; set; }
         public string Name { get; set; }
         private string fullName;
         public string FullName
@@ -19,11 +19,11 @@ namespace Chess
         }
         public string Abb { get; set; }
 
-        public Piece(Color colorSide, int rowInit, int columnInit, string name, string abb)
+        public Piece(Color colorSide, Square initPos, string name, string abb)
         {
             ColorSide = colorSide;
-            RowInit = rowInit;
-            ColumnInit = columnInit;
+            InitPos = initPos;
+            ActualPos = initPos;
             Name = name;
             if (colorSide == Color.Black)
             {
@@ -33,8 +33,28 @@ namespace Chess
             else
             {
                 FullName = $"White {name}";
-                Abb = $"b{abb}";
+                Abb = $"w{abb}";
             }
+        }
+        public Square OccupySquare(Square square)
+        {
+            square.State = StateEnum.Occupied;
+            square.OccupyingColor = ColorSide;
+            return square;
+        }
+        public Square FreeSquare(Square square)
+        {
+            square.State = StateEnum.Free;
+            //square.OccupyingColor = null;
+            return square;
+        }
+
+        public abstract Square Move(Square squareDestination);
+
+        public abstract bool IsValidMovement(Square squareDestination);
+        public virtual bool IsTheActualPos(Square sqDest)
+        {
+            return ActualPos.Equals(sqDest);
         }
 
     }
