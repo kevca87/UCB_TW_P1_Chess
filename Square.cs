@@ -13,7 +13,7 @@ namespace Chess
     {
         public int Row { get; set; }
         public int Column { get; set; }
-        public StateEnum State { get; set; } = StateEnum.Occupied;
+        public StateEnum State { get; set; } = StateEnum.Free;
         public Color OccupyingColor { get; set; }
         public Square(int row,int column)
         {
@@ -39,7 +39,7 @@ namespace Chess
 
         public override string ToString()
         {
-            return $"(c: {Column}, r: {Row}";
+            return $"{(char)(Column+97)}{Row+1}";
         }
 
         public override bool Equals(object obj)
@@ -47,6 +47,20 @@ namespace Chess
             return obj is Square square &&
                    Row == square.Row &&
                    Column == square.Column;
+        }
+
+        public void GetInfo()
+        {
+            if (IsOccupied())
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+            }
+            Console.Write($"{ToString()} ");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }

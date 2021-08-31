@@ -52,6 +52,24 @@ namespace Chess
             int row = (int)Char.GetNumericValue(rowChar) - 1;
             return Matrix[row,col];
         }
+        public void SetSquare(Square sqNew)
+        {
+            int c = sqNew.Column;
+            int r = sqNew.Row;
+            Matrix[r, c] = sqNew;
+            // check if void works
+        }
+        public void GetInfo()
+        {
+            for (int r=7; r>=0;r--)
+            {
+                for (int c = 0; c < 8; c++)
+                {
+                    Matrix[r, c].GetInfo();
+                }
+                Console.WriteLine();
+            }
+        }
 
     }
 }

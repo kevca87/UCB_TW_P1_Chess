@@ -33,7 +33,8 @@ namespace Chess
                 }
                 Pawn p = new Pawn(ColorSide, sqInit, pawn_number);
                 pawn_number++;
-                p.OccupySquare(sqInit);
+                p.OccupySquare(sqInit); //sqInit = p.OccupySquare(sqInit);
+                //boardGame.SetSquare(sqInit);
                 PlayerActivePieces.Add(p);
             }
         }
@@ -41,6 +42,11 @@ namespace Chess
         {
             //Use of Linq and Lambdas
             Piece pieceToMove = PlayerActivePieces.FirstOrDefault(piece => piece.Abb == pieceAbb);
+            if (pieceToMove == null)
+            {
+                Exception e = new Exception("Esa pieza no existe o no esta en su poder");
+                throw e;
+            }
             try
             {
                 squareDest = pieceToMove.Move(squareDest);

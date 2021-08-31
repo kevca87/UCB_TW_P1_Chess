@@ -45,6 +45,11 @@ namespace Chess
                 ActualPos = squareDestination;
                 MovedFirstTime = false;
             }
+            else
+            {
+                Exception e = new Exception("Movimiento invalido");
+                throw e;
+            }
             return ActualPos;
         }
         Func<Square, bool> MoveRule;
